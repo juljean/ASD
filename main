@@ -1,0 +1,39 @@
+#Виконала Надь Юлія КМ-91
+#Алгоритм сортування злиттям на Python
+
+def merge(div_l):
+    if len(div_l)>1: #розділення доки довжина діленого масиву не буде 1
+        mid=len(div_l)//2 #середній елемент, по якому ділиться масив
+        right=div_l[:mid]
+        left=div_l[mid:]
+
+        merge(right) #рекурсія
+        merge(left)
+
+        r=0#індекс для right
+        l=0#індекс для left
+        k=0#індекс для div_l
+
+        while(r<len(right) and l<len(left)): #якщо у якомусь масиві не закінчились елементи для внесення у загальний масив
+            if right[r]<left[l]:#звичайне порівняння
+                div_l[k]=right[r]
+                r+=1
+            else:
+                div_l[k]=left[l]
+                l+=1
+            k+=1
+
+        while(r<len(right)):#якщо елементи у left для внесення закінчилися
+            div_l[k]=right[r]
+            r+=1
+            k+=1
+
+        while(l<len(left)):#якщо елементи у right для внесення закінчилися
+            div_l[k]=left[l]
+            l+=1
+            k+=1
+
+array=[4,7,2,3,4,13,45,1]
+print("Unsorted list is", array)
+merge(array)
+print("Sorted list is", array)
